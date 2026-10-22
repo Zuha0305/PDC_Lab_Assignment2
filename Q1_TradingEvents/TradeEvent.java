@@ -1,3 +1,4 @@
+package Q1_TradingEvents;
 public class TradeEvent 
 {
     protected String senderId;
