@@ -11,4 +11,14 @@ public class ReutersQuoteEvent extends TradeEvent
         this.bidPrice = bidPrice;
         this.askPrice = askPrice;
     }
+     @Override
+    public void dispatch() {
+        double spread = askPrice - bidPrice;
+
+        System.out.println("Reuters Market Quote");
+        System.out.println("Sender: " + senderId);
+        System.out.println("Bid Price: " + bidPrice);
+        System.out.println("Ask Price: " + askPrice);
+        System.out.println("Bid-Ask Spread: " + spread);
+    }
 }
