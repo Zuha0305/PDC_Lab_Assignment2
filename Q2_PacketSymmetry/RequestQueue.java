@@ -13,4 +13,29 @@ public class RequestQueue {
         rear = -1;
         size = 0;
     }
+    public void enqueue(int value) {
+        if (isFull()) {
+            System.out.println("Queue is full");
+            return;
+        }
+
+        rear = (rear + 1) % queue.length;
+        queue[rear] = value;
+        size++;
+    }
+
+    public int dequeue() 
+    {
+        if (isEmpty()) 
+        {
+            System.out.println("Queue is empty");
+            return -1;
+        }
+
+        int value = queue[front];
+        front = (front + 1) % queue.length;
+        size--;
+
+        return value;
+    }
 }
