@@ -20,4 +20,14 @@ public class PacketSymmetryAuditor
 
         return true;
     }
+    public static void main(String[] args) 
+    {
+        int[] packet1 = {1, 2, 3, 2, 1};
+        int[] packet2 = {1, 2, 3, 4};
+        int[] packet3 = {5, 5};
+
+        System.out.println("Packet 1: " + isSymmetric(packet1));
+        System.out.println("Packet 2: " + isSymmetric(packet2));
+        System.out.println("Packet 3: " + isSymmetric(packet3));
+    }
 }
