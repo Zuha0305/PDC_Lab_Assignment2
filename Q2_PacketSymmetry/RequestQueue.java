@@ -23,7 +23,15 @@ public class RequestQueue {
         queue[rear] = value;
         size++;
     }
+    public boolean isEmpty() 
+    {
+        return size == 0;
+    }
 
+    public boolean isFull() 
+    {
+        return size == queue.length;
+    }
     public int dequeue() 
     {
         if (isEmpty()) 
@@ -37,5 +45,9 @@ public class RequestQueue {
         size--;
 
         return value;
+    }
+     public int getSize() 
+     {
+        return size;
     }
 }
