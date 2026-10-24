@@ -1,8 +1,8 @@
 package Q3_Telemetry;
 
-public class TelemetryThread
+public class TelemetryThread extends Thread
 {
-    void run()
+    public void run()
     {
         for (int i = 1; i <= 5; i++)
         {
