@@ -12,5 +12,8 @@ public class AsyncWebEngineApp
 
         Thread logThread = new Thread(new LogProcessorTask());
         logThread.setName("Log-Worker");
+
+        telemetryThread.start();
+        logThread.start();
     }
 }
