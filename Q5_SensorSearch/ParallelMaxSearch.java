@@ -4,8 +4,25 @@ public class ParallelMaxSearch extends SensorSearchEngine {
     private int maximum;
 
     public ParallelMaxSearch(String name, int[] sensorGrid,
-                             int start, int end) {
+                             int start, int end) 
+    {
         super(name, sensorGrid, start, end);
         maximum = Integer.MIN_VALUE;
+    }
+    @Override
+    public void processGrid() 
+    {
+        for (int i = start; i < end; i++) 
+        {
+            if (sensorGrid[i] > maximum) 
+            {
+                maximum = sensorGrid[i];
+            }
+        }
+    }
+    
+    public int getMaximum() 
+    {
+        return maximum;
     }
 }
