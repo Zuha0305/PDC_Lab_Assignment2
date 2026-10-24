@@ -55,7 +55,7 @@ public class ForkJoinPortfolioApp
         }
         finally
         {
-            pool.shutdown();
+            pool.close();
         }
     }
 }
