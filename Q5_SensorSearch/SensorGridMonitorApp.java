@@ -19,5 +19,24 @@ public class SensorGridMonitorApp
         ParallelMaxSearch maxWorker1 = new ParallelMaxSearch("Max-Worker-1", sensorGrid, 0, middle);
         
         ParallelMaxSearch maxWorker2 = new ParallelMaxSearch("Max-Worker-2", sensorGrid, middle, sensorGrid.length);
+
+        minWorker1.start();
+        minWorker2.start();
+        maxWorker1.start();
+        maxWorker2.start();
+        
+        try 
+        {
+            minWorker1.join();
+            minWorker2.join();
+            maxWorker1.join();
+            maxWorker2.join();
+        } 
+        catch (InterruptedException e) 
+        {
+            Thread.currentThread().interrupt();
+            System.out.println("Search interrupted.");
+            return;
+        }
     }
 }
