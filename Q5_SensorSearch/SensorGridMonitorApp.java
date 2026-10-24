@@ -38,5 +38,12 @@ public class SensorGridMonitorApp
             System.out.println("Search interrupted.");
             return;
         }
+        int minimum = Math.min(minWorker1.getMinimum(), minWorker2.getMinimum());
+
+        int maximum = Math.max(maxWorker1.getMaximum(), maxWorker2.getMaximum());
+        
+        System.out.println("Total sensor readings: " + sensorGrid.length);
+        System.out.println("Minimum sensor value: " + minimum);
+        System.out.println("Maximum sensor value: " + maximum);
     }
 }
