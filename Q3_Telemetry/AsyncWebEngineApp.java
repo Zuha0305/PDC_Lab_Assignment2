@@ -15,5 +15,11 @@ public class AsyncWebEngineApp
 
         telemetryThread.start();
         logThread.start();
+
+        System.out.println(telemetryThread.getName()
+                + " state: " + telemetryThread.getState());
+
+        System.out.println(logThread.getName()
+                + " state: " + logThread.getState());
     }
 }
