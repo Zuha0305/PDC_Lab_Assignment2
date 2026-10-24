@@ -35,7 +35,19 @@ public class ForkJoinPortfolioApp
         
         double riskCap = 1500;
         
-        pool.invoke(new PortfolioThresholdTask(
-                assets, 0, size, riskCap));
+        pool.invoke(new PortfolioThresholdTask(assets, 0, size, riskCap));
+
+        System.out.println("Portfolio size: " + size);
+        System.out.println("Serial risk score: " + serialSum);
+        System.out.println("Parallel risk score: " + parallelSum);
+        
+        System.out.println("Serial time: "+ (serialEnd - serialStart) / 1_000_000.0 + " ms");
+        
+        System.out.println("Parallel time: "+ (parallelEnd - parallelStart) / 1_000_000.0 + " ms");
+        
+        System.out.println("Stress test completed.");
+        System.out.println("Updated first asset value: " + assets[0]);
+        
+        pool.shutdown();
     }
 }
