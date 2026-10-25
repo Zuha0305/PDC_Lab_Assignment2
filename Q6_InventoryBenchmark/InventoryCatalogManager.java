@@ -26,5 +26,18 @@ public class InventoryCatalogManager
         java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(THREAD_COUNT);
         long startTime = System.nanoTime();
     }
+    for (int thread = 0; thread < THREAD_COUNT; thread++) 
+    {
+        final int workerId = thread;
     
+        executor.execute(() -> {
+            for (int i = 0; i < TOTAL_OPERATIONS / THREAD_COUNT; i++) 
+            {
+                String item = "Item-" + (i % 1000);
+                int quantity = workerId * (TOTAL_OPERATIONS / THREAD_COUNT) + i;
+    
+                inventory.put(item, quantity);
+            }
+        });
+    }
 }
