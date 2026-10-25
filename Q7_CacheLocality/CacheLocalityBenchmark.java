@@ -104,9 +104,16 @@ public class CacheLocalityBenchmark
     }
     public static void main(String[] args) 
     {
-
+        initializeMatrix();
+    
         System.out.println("Cache Locality Benchmark");
         System.out.println("Matrix size: " + SIZE + " x " + SIZE);
         System.out.println("Iterations: " + ITERATIONS);
+        System.out.println();
+    
+        runBenchmark();
+    
+        System.out.println();
+        System.out.println("Benchmark completed successfully.");
     }
 }
