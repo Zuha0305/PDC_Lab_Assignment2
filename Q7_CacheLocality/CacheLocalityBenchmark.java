@@ -83,6 +83,8 @@ public class CacheLocalityBenchmark
         System.out.printf("Row-major average: %.3f ms%n", rowMajorAverage / 1_000_000.0);
     
         System.out.printf("Column-major average: %.3f ms%n", columnMajorAverage / 1_000_000.0);
+    
+        displaySpeedup(rowMajorAverage, columnMajorAverage);
     }
     private static void displaySpeedup(double rowMajorAverage, double columnMajorAverage) 
     {
