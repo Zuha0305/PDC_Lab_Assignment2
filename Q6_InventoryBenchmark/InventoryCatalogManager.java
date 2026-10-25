@@ -20,5 +20,11 @@ public class InventoryCatalogManager
     {
         return new ConcurrentHashMap<>();
     }
+
+    private static void runBenchmark(String mapName, Map<String, Integer> inventory) 
+    {
+        java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(THREAD_COUNT);
+        long startTime = System.nanoTime();
+    }
     
 }
