@@ -15,4 +15,10 @@ public class InventoryCatalogManager
     {
         return Collections.synchronizedMap(new HashMap<>());
     }
+
+    private static Map<String, Integer> createConcurrentMap() 
+    {
+        return new ConcurrentHashMap<>();
+    }
+    
 }
