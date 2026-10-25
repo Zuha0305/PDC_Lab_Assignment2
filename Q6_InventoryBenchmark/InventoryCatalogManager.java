@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class InventoryCatalogManager 
 {
@@ -23,62 +26,73 @@ public class InventoryCatalogManager
 
     private static void runBenchmark(String mapName, Map<String, Integer> inventory) 
     {
-        java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(THREAD_COUNT);
-        long startTime = System.nanoTime();
-    }
-    for (int thread = 0; thread < THREAD_COUNT; thread++) 
-    {
-        final int workerId = thread;
-    
-        executor.execute(() -> {
-            for (int i = 0; i < TOTAL_OPERATIONS / THREAD_COUNT; i++) 
-            {
-                String item = "Item-" + (i % 1000);
-                int quantity = workerId * (TOTAL_OPERATIONS / THREAD_COUNT) + i;
-    
-                inventory.put(item, quantity);
-            }
-        });
-    }
-    executor.shutdown();
 
-    try 
-    {
-        if (!executor.awaitTermination(1, java.util.concurrent.TimeUnit.MINUTES)) 
+        ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+
+        long startTime = System.nanoTime();
+
+        for (int thread = 0; thread < THREAD_COUNT; thread++) 
+        {
+            final int workerId = thread;
+
+            executor.execute(() -> 
+            {
+                for (int i = 0; i < TOTAL_OPERATIONS / THREAD_COUNT; i++) 
+                {
+
+                    String item = "Item-" + (i % 1000);
+
+                    int quantity = workerId * (TOTAL_OPERATIONS / THREAD_COUNT) + i;
+
+                    inventory.put(item, quantity);
+                }
+            });
+        }
+
+        executor.shutdown();
+
+        try 
+        {
+            if (!executor.awaitTermination(1, TimeUnit.MINUTES)) 
+            {
+                executor.shutdownNow();
+                System.out.println("Benchmark timed out.");
+                return;
+            }
+        } 
+        catch (InterruptedException e) 
         {
             executor.shutdownNow();
-            System.out.println("Benchmark timed out.");
+            Thread.currentThread().interrupt();
+            System.out.println("Benchmark interrupted.");
             return;
         }
-    } 
-    catch (InterruptedException e) 
-    {
-        executor.shutdownNow();
-        Thread.currentThread().interrupt();
-        System.out.println("Benchmark interrupted.");
-        return;
-    }
-    long elapsedNanos = System.nanoTime() - startTime;
 
-    double elapsedSeconds = elapsedNanos / 1_000_000_000.0;
-    
-    double throughput = TOTAL_OPERATIONS / elapsedSeconds;
-    
-    System.out.println(mapName + " execution time: " + (elapsedNanos / 1_000_000.0) + " ms");
-    
-    System.out.printf("%s throughput: %.2f updates/second%n", mapName, throughput);
-    
-    System.out.println("Inventory items: " + inventory.size());
-    System.out.println();
+        long elapsedNanos = System.nanoTime() - startTime;
+
+        double elapsedSeconds = elapsedNanos / 1_000_000_000.0;
+
+        double throughput = TOTAL_OPERATIONS / elapsedSeconds;
+
+        System.out.println(mapName + " execution time: " + (elapsedNanos / 1_000_000.0) + " ms");
+
+        System.out.printf("%s throughput: %.2f updates/second%n", mapName, throughput);
+
+        System.out.println("Inventory items: " + inventory.size());
+        System.out.println();
+    }
+
     public static void main(String[] args) 
     {
 
         Map<String, Integer> synchronizedInventory = createSynchronizedMap();
-    
+
         runBenchmark("SynchronizedMap", synchronizedInventory);
-        Map<String, Integer> concurrentInventory =createConcurrentMap();
-    
+
+        Map<String, Integer> concurrentInventory = createConcurrentMap();
+
         runBenchmark("ConcurrentHashMap", concurrentInventory);
+
         System.out.println("Both inventory benchmarks completed.");
     }
 }
