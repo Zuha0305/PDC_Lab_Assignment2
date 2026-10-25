@@ -79,5 +79,6 @@ public class InventoryCatalogManager
         Map<String, Integer> concurrentInventory =createConcurrentMap();
     
         runBenchmark("ConcurrentHashMap", concurrentInventory);
+        System.out.println("Both inventory benchmarks completed.");
     }
 }
