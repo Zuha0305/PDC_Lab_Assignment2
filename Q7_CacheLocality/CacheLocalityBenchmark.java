@@ -84,6 +84,22 @@ public class CacheLocalityBenchmark
     
         System.out.printf("Column-major average: %.3f ms%n", columnMajorAverage / 1_000_000.0);
     }
+    private static void displaySpeedup(double rowMajorAverage, double columnMajorAverage) 
+    {
+
+        if (rowMajorAverage < columnMajorAverage) 
+        {
+            System.out.printf("Row-major speedup: %.2fx%n", columnMajorAverage / rowMajorAverage);
+        } 
+        else if (columnMajorAverage < rowMajorAverage) 
+        {
+            System.out.printf("Column-major speedup: %.2fx%n", rowMajorAverage / columnMajorAverage);
+        } 
+        else 
+        {
+            System.out.println("Both traversal methods have equal timing.");
+        }
+    }
     public static void main(String[] args) 
     {
 
