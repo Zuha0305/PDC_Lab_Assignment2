@@ -45,7 +45,16 @@ public class CacheLocalityBenchmark
     
         return sum;
     }
-
+    private static long measureRowMajor() 
+    {
+        long startTime = System.nanoTime();
+    
+        rowMajorTraversal();
+    
+        long endTime = System.nanoTime();
+    
+        return endTime - startTime;
+    }
     public static void main(String[] args) 
     {
 
