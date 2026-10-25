@@ -11,4 +11,8 @@ public class InventoryCatalogManager
     private static final int TOTAL_OPERATIONS = 50000;
     private static final int THREAD_COUNT = 10;
 
+    private static Map<String, Integer> createSynchronizedMap() 
+    {
+        return Collections.synchronizedMap(new HashMap<>());
+    }
 }
