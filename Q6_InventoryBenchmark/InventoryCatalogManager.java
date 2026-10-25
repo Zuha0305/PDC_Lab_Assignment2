@@ -76,5 +76,8 @@ public class InventoryCatalogManager
         Map<String, Integer> synchronizedInventory = createSynchronizedMap();
     
         runBenchmark("SynchronizedMap", synchronizedInventory);
+        Map<String, Integer> concurrentInventory =createConcurrentMap();
+    
+        runBenchmark("ConcurrentHashMap", concurrentInventory);
     }
 }
