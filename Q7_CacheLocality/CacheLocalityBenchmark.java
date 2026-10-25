@@ -55,6 +55,16 @@ public class CacheLocalityBenchmark
     
         return endTime - startTime;
     }
+    private static long measureColumnMajor() 
+    {
+        long startTime = System.nanoTime();
+    
+        columnMajorTraversal();
+    
+        long endTime = System.nanoTime();
+    
+        return endTime - startTime;
+    }
     public static void main(String[] args) 
     {
 
