@@ -70,4 +70,11 @@ public class InventoryCatalogManager
     
     System.out.println("Inventory items: " + inventory.size());
     System.out.println();
+    public static void main(String[] args) 
+    {
+
+        Map<String, Integer> synchronizedInventory = createSynchronizedMap();
+    
+        runBenchmark("SynchronizedMap", synchronizedInventory);
+    }
 }
