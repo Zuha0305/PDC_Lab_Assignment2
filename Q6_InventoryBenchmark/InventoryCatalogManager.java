@@ -58,4 +58,16 @@ public class InventoryCatalogManager
         System.out.println("Benchmark interrupted.");
         return;
     }
+    long elapsedNanos = System.nanoTime() - startTime;
+
+    double elapsedSeconds = elapsedNanos / 1_000_000_000.0;
+    
+    double throughput = TOTAL_OPERATIONS / elapsedSeconds;
+    
+    System.out.println(mapName + " execution time: " + (elapsedNanos / 1_000_000.0) + " ms");
+    
+    System.out.printf("%s throughput: %.2f updates/second%n", mapName, throughput);
+    
+    System.out.println("Inventory items: " + inventory.size());
+    System.out.println();
 }
