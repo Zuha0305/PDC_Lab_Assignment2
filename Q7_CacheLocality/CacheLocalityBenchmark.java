@@ -65,6 +65,25 @@ public class CacheLocalityBenchmark
     
         return endTime - startTime;
     }
+    private static void runBenchmark() 
+    {
+        long rowMajorTotal = 0;
+        long columnMajorTotal = 0;
+    
+        for (int i = 0; i < ITERATIONS; i++) 
+        {
+            rowMajorTotal += measureRowMajor();
+            columnMajorTotal += measureColumnMajor();
+        }
+    
+        double rowMajorAverage = rowMajorTotal / (double) ITERATIONS;
+    
+        double columnMajorAverage = columnMajorTotal / (double) ITERATIONS;
+    
+        System.out.printf("Row-major average: %.3f ms%n", rowMajorAverage / 1_000_000.0);
+    
+        System.out.printf("Column-major average: %.3f ms%n", columnMajorAverage / 1_000_000.0);
+    }
     public static void main(String[] args) 
     {
 
