@@ -31,6 +31,20 @@ public class CacheLocalityBenchmark
     
         return sum;
     }
+    private static double columnMajorTraversal() 
+    {
+        double sum = 0;
+    
+        for (int j = 0; j < SIZE; j++) 
+        {
+            for (int i = 0; i < SIZE; i++) 
+            {
+                sum += matrix[i][j];
+            }
+        }
+    
+        return sum;
+    }
 
     public static void main(String[] args) 
     {
