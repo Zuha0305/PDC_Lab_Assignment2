@@ -40,4 +40,22 @@ public class InventoryCatalogManager
             }
         });
     }
+    executor.shutdown();
+
+    try 
+    {
+        if (!executor.awaitTermination(1, java.util.concurrent.TimeUnit.MINUTES)) 
+        {
+            executor.shutdownNow();
+            System.out.println("Benchmark timed out.");
+            return;
+        }
+    } 
+    catch (InterruptedException e) 
+    {
+        executor.shutdownNow();
+        Thread.currentThread().interrupt();
+        System.out.println("Benchmark interrupted.");
+        return;
+    }
 }
